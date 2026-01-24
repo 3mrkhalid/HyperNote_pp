@@ -1,0 +1,16 @@
+how to use git :
+
+
+
+- git add .
+- git commit -m "Backend complete"
+- git push origin back
+
+#Switch to the main branch:
+- git checkout main
+
+#Update your main (just in case):
+- git pull origin main
+
+#Perform the Merge:
+- git merge back
