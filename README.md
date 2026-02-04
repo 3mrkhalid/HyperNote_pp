@@ -1,2 +1,0 @@
-# HyperNote-
-# HyperNote++
