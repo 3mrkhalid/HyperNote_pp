@@ -1,6 +1,6 @@
 const allowedOrigins = [
     'http://localhost:3000',
-    'https://3mrkhalid.github.io'
+    'https://skillswipe.netlify.app'
 ];
 
 module.exports = allowedOrigins;
