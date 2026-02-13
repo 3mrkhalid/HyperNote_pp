@@ -1,4 +1,4 @@
-const User = require("../models/user");
+import User from '../models/user.js'
 
 const me = async (req, res) => {
   try {
@@ -29,7 +29,7 @@ const getAllUsers = async (req, res)=> {
     res.json(users)
 }
 
-module.exports = 
+export default
 {
     getAllUsers,
     me,

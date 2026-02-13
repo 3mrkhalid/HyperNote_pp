@@ -1,6 +1,6 @@
-const User = require("../models/user");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
+import User from '../models/user.js'
+import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
 
 //GENERATE ACCESS TOKEN AND REFRESH TOKEN
 const generateTokens = (user) => {
@@ -37,6 +37,7 @@ const register = async (req, res) => {
       return res.status(409).json({ message: "User already exists" });
 
     const hashedPassword = await bcrypt.hash(password, 10);
+    
     const newUser = await User.create({
       username,
       email,
@@ -97,11 +98,12 @@ const logout = (req, res)=> {
 
   if(!refreshToken) return res.sendStatus(204);
 
-  res.clearCookie("jwt", {
-    httpOnly: true,
-    sameSite: "None",
+    res.clearCookie("jwt", {
+    httpOnly: process.env.NODE_ENV === "production",
     secure: process.env.NODE_ENV === "production",
-  } ) 
+    sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
+    });
+
 
   res.json({message:"logout successfully"})
 }
@@ -126,7 +128,7 @@ const refresh = async (req, res) => {
   );
 };
 
-module.exports = 
+export default
 {
   register,
   login,

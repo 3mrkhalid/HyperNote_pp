@@ -1,12 +1,28 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const morgan = require('morgan');
-require('dotenv').config();
-const connectDB = require('./config/dbConn');
-const cors = require('cors');
-const corsOptions = require('./config/corsOptions');
-const CookieParser = require('cookie-parser');
-const path = require('path');
+
+import express from 'express';
+import mongoose from 'mongoose';
+import morgan from 'morgan';
+import dotenv from 'dotenv';
+import cors from 'cors';
+import CookieParser from 'cookie-parser';
+import path  from 'path';
+
+dotenv.config();
+
+import connectDB from './config/dbConn.js';
+import corsOptions from './config/corsOptions.js';
+
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+
+import rootRouter from './routes/root.js';
+import authRouter from './routes/authRoutes.js';
+import userRouter from './routes/userRoutes.js';
+
+
+
 
 // Connect to MongoDB
 connectDB();
@@ -33,11 +49,11 @@ app.use('/', express.static(path.join(__dirname, 'public')));
 
 
 // Routes
-app.use('/', require('./routes/root'));
+app.use('/', rootRouter);
 
-app.use('/api/v1/auth', require('./routes/authRoutes'));
+app.use('/api/v1/auth', authRouter);
 
-app.use('/api/v1/users', require('./routes/userRoutes'))
+app.use('/api/v1/users', userRouter)
 
 
 // 404 handler

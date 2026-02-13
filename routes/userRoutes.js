@@ -1,11 +1,16 @@
-const express = require("express");
+import express from 'express';
+
 const router = express.Router();
-const usersController = require("../controllers/usersController")
-const verifyJWT = require('../middleware/verifyJWT')
-const verifyAdmin = require('../middleware/verifyAdmin')
+
+import usersController from'../controllers/usersController.js'
+import verifyJWT from '../middleware/verifyJWT.js';
+import verifyAdmin from '../middleware/verifyAdmin.js';
+
 
 router.use(verifyJWT)
 router.route("/")
   .get(verifyAdmin, usersController.getAllUsers);
 router.route("/me").get(usersController.me)
-module.exports = router;
+
+
+export default router;
